@@ -8,11 +8,10 @@
     <div class="content">
       <div>
         <textarea :class='["write",{"to_bloder":focus_flag2},{"ipt_color":focus_flag1}]' v-model="ipt"></textarea>
-        <div class="count">字数:{{ipt.length}}</div>
+        <div class="count">{{ipt.length}}/120</div>
       </div>
       <div class="choose">
-        <div :class='["choose_items",{"focus_color":focus_flag1}]' @click="iptColor">T</div>
-        <div :class='["choose_items",{"focus_color":focus_flag2},{"to_bloder":focus_flag2}]' @click="toBloder">B</div>
+        <div :class='["choose_items",{"focus_color":focus_flag1}]' @click="iptColor">T</div><div :class='["choose_items",{"focus_color":focus_flag2},{"to_bloder":focus_flag2}]' @click="toBloder">B</div>
         <div :class='["choose_quick",{"focus_color":focus_flag3},{"to_bloder":focus_flag3}]' @click="shortMessShow">快捷留言</div>
       </div>
     </div>
@@ -40,20 +39,13 @@
             focus_flag1:false,
             focus_flag2:false,
             focus_flag3:false,
+            n:-1,
+            str:"",
           }
       },
       methods:{
         goBack(){
           window.history.go(-1);
-        },
-        issue(){
-          if(this.ipt==0){
-            alert("留言不能为空！")
-          }else{
-            this.loading_flag=!this.loading_flag;
-            setTimeout(()=>{this.loading_flag=!this.loading_flag;this.success_flag=!this.success_flag;},1000);
-            setTimeout(()=>{this.success_flag=!this.success_flag;this.ipt="";},2000);
-          }
         },
         shortMessShow(){
           this.short_mess_flag=!this.short_mess_flag;
@@ -61,41 +53,26 @@
         },
         addShort1(){
           this.ipt=this.ipt+"路过路过~踩个小脚丫*^_^*";
-          if(this.ipt.length>90){
-            alert("长度超出限制！");
-            this.ipt=this.ipt.substr(0,90);
-          }
         },
         addShort2(){
           this.ipt=this.ipt+"好嗨哟!今天要继续加油噢！";
-          if(this.ipt.length>90){
-            alert("长度超出限制！");
-            this.ipt=this.ipt.substr(0,90);
-          }
         },
         addShort3(){
           this.ipt=this.ipt+"能力有待加强哦。不要放弃！";
-          if(this.ipt.length>90){
-            alert("长度超出限制！");
-            this.ipt=this.ipt.substr(0,90);
-          }
         },
         addShort4(){
           this.ipt=this.ipt+"项目棒棒！继续加油！";
-          if(this.ipt.length>90){
-            alert("长度超出限制！");
-            this.ipt=this.ipt.substr(0,90);
-          }
         },
         addShort5(){
           this.ipt=this.ipt+"坐等更新！";
-          if(this.ipt.length>90){
-            alert("长度超出限制！");
-            this.ipt=this.ipt.substr(0,90);
-          }
         },
         toBloder(){
+          window.localStorage.setItem("mess_n","-1");
           this.focus_flag2=!this.focus_flag2;
+          if(this.focus_flag3==true){
+            this.short_mess_flag=!this.short_mess_flag;
+            this.focus_flag3=!this.focus_flag3;
+          }
         },
         iptColor(){
           this.focus_flag1=!this.focus_flag1;
@@ -104,15 +81,44 @@
             this.focus_flag3=!this.focus_flag3;
           }
         },
+        issue(){
+          if(this.ipt==0){
+            alert("留言不能为空！")
+          }else{
+            this.loading_flag=!this.loading_flag;
+            setTimeout(()=>{this.loading_flag=!this.loading_flag;this.success_flag=!this.success_flag;},1000);
+            setTimeout(()=>{this.success_flag=!this.success_flag;this.ipt="";},2000);
+            // let _this = this;
+            // setTimeout(function () {
+            //   _this.success_flag=!_this.success_flag;_this.ipt="";
+            // },2000);
+            window.localStorage.removeItem("visitor");
+            window.localStorage.removeItem("time");
+            window.localStorage.removeItem("content");
+
+            window.localStorage.setItem("visitor","naoker");
+            window.localStorage.setItem("time","2019-03-07 17:54");
+            window.localStorage.setItem("content",this.ipt);
+
+            this.str=window.localStorage.getItem("mess_str");
+            this.str=this.str+"{\"visitor\":\""+window.localStorage.getItem("visitor")+"\",\"time\":\""+window.localStorage.getItem("time")+"\",\"star\":false,\"content\":\""+window.localStorage.getItem("content")+"\"}###";
+            window.localStorage.setItem("mess_str",this.str);
+            this.n=eval(window.localStorage.getItem("mess_n"));
+            this.n=this.n+1;
+            window.localStorage.setItem("mess_n",this.n);
+          }
+        },
+      },
+      created(){
       },
       watch:{
-          ipt:function () {
-            if(this.ipt.length>10){
-              alert('超出长度限制');
-              this.ipt = this.ipt.substr(0,10);
-            }
+        ipt:function () {
+          if(this.ipt.length>120){
+            alert('超出长度限制');
+            this.ipt = this.ipt.substr(0,120);
           }
-      }
+        }
+      },
     }
 </script>
 
@@ -171,16 +177,16 @@
   }
   .write{
     display:block;
-    padding:12px 10px;
-    min-height:220px;
+    padding:11px 10px;
+    height:220px;
     width:100%;
-    text-indent:20px;
+    text-indent:24px;
     resize:none;
-    font-size:24px;
+    font-size:23px;
     font-family:楷体;
     color:#888;
     background:#fefefe;
-    line-height:30px;
+    line-height:28px;
     /*text-align:center;*/
   }
   .choose{
@@ -220,10 +226,10 @@
   }
   .count{
     position: absolute;
-    top:174px;
-    right:25px;
+    top:183px;
+    right:24px;
     letter-spacing:1.2px;
-    font-size:22px;
+    font-size:21px;
     color:lightgreen;
   }
   .tip{
@@ -268,6 +274,7 @@
     font-weight:bolder;
   }
   .ipt_color{
-    color:red;
+    color:#fff;
+    background:#bbb;
   }
 </style>

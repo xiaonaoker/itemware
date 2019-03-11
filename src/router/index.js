@@ -9,13 +9,38 @@ const Home = (resolve) => {
     resolve(module)
   })
 }
-const Ablum = (resolve) => {
-  import('@/components/ablum/ablum.vue').then((module) => {
+const Album = (resolve) => {
+  import('@/components/album/Album.vue').then((module) => {
+    resolve(module)
+  })
+}
+const HtmlAlbum = (resolve) => {
+  import('@/components/album/htmlAlbum.vue').then((module) => {
+    resolve(module)
+  })
+}
+const JsAlbum = (resolve) => {
+  import('@/components/album/jsAlbum.vue').then((module) => {
+    resolve(module)
+  })
+}
+const VueAlbum = (resolve) => {
+  import('@/components/album/vueAlbum.vue').then((module) => {
+    resolve(module)
+  })
+}
+const CountAlbum = (resolve) => {
+  import('@/components/album/countAlbum.vue').then((module) => {
+    resolve(module)
+  })
+}
+const CompleteAlbum = (resolve) => {
+  import('@/components/album/completeAlbum.vue').then((module) => {
     resolve(module)
   })
 }
 const Mess = (resolve) => {
-  import('@/components/mess/mess.vue').then((module) => {
+  import('@/components/mess/Mess.vue').then((module) => {
     resolve(module)
   })
 }
@@ -29,6 +54,32 @@ const Ware = (resolve) => {
     resolve(module)
   })
 }
+const HtmlWare = (resolve) => {
+  import('@/components/ware/htmlWare.vue').then((module) => {
+    resolve(module)
+  })
+}
+const JsWare = (resolve) => {
+  import('@/components/ware/jsWare.vue').then((module) => {
+    resolve(module)
+  })
+}
+const VueWare = (resolve) => {
+  import('@/components/ware/vueWare.vue').then((module) => {
+    resolve(module)
+  })
+}
+const CountWare = (resolve) => {
+  import('@/components/ware/countWare.vue').then((module) => {
+    resolve(module)
+  })
+}
+const CompleteWare = (resolve) => {
+  import('@/components/ware/completeWare.vue').then((module) => {
+    resolve(module)
+  })
+}
+
 
 export default new Router({
   routes: [{
@@ -40,9 +91,34 @@ export default new Router({
     }
   },
     {
-      path: '/ablum',
-      name: '相册',
-      component: Ablum
+      path: '/album',
+      name: '图册',
+      component: Album
+    },
+    {
+      path: '/htmlalbum',
+      name: 'html图册',
+      component: HtmlAlbum
+    },
+    {
+      path: '/jsalbum',
+      name: 'JavaScript图册',
+      component: JsAlbum
+    },
+    {
+      path: '/vuealbum',
+      name: 'vue图册',
+      component: VueAlbum
+    },
+    {
+      path: '/countalbum',
+      name: '算法图册',
+      component: CountAlbum
+    },
+    {
+      path: '/completealbum',
+      name: '完整项目图册',
+      component: CompleteAlbum
     },
     {
       path: '/mess',
@@ -58,6 +134,31 @@ export default new Router({
       path: '/ware',
       name: '仓库',
       component:Ware
+    },
+    {
+      path: '/htmlware',
+      name: 'html仓库',
+      component: HtmlWare
+    },
+    {
+      path: '/jsware',
+      name: 'js仓库',
+      component: JsWare
+    },
+    {
+      path: '/vueware',
+      name: 'vue仓库',
+      component: VueWare
+    },
+    {
+      path: '/countware',
+      name: 'count仓库',
+      component: CountWare
+    },
+    {
+      path: '/completeware',
+      name: 'complete仓库',
+      component: CompleteWare
     },
     ]
 

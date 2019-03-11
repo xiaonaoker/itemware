@@ -5,11 +5,11 @@
         <div class="title">仓库</div>
       </div>
       <div class="wares">
-        <div class="ware_specific">html+css练习库</div>
-        <div class="ware_specific">JavaScript练习库</div>
-        <div class="ware_specific">vue练习库</div>
-        <div class="ware_specific">算法练习库</div>
-        <div class="ware_specific">完整项目库</div>
+        <div class="ware_specific" @click="goHtmlWare">html+css练习库</div>
+        <div class="ware_specific" @click="goJsWare">JavaScript练习库</div>
+        <div class="ware_specific" @click="goVueWare">vue练习库</div>
+        <div class="ware_specific" @click="goCountWare">算法练习库</div>
+        <div class="ware_specific" @click="goCompleteWare">完整项目库</div>
       </div>
     </div>
 </template>
@@ -25,6 +25,36 @@
       methods:{
         goBack(){
           window.history.go(-1);
+        },
+        goHtmlWare(){
+          this.$router.push({
+            path: "/htmlWare",
+            query: {}
+          });
+        },
+        goJsWare(){
+          this.$router.push({
+            path: "/jsWare",
+            query: {}
+          });
+        },
+        goVueWare(){
+          this.$router.push({
+            path: "/vueWare",
+            query: {}
+          });
+        },
+        goCountWare(){
+          this.$router.push({
+            path: "/countWare",
+            query: {}
+          });
+        },
+        goCompleteWare(){
+          this.$router.push({
+            path: "/completeWare",
+            query: {}
+          });
         },
       }
     }
@@ -62,6 +92,7 @@
     font-size:24px;
     color: #fff;
     text-align: center;
+    letter-spacing:1.2px;
   }
   .wares{
     position:absolute;

@@ -1,27 +1,26 @@
 <template>
-  <div class="ablum">
+  <div class="js_ware">
     <div class="head">
       <div class="go_back" @click="goBack"></div>
-      <div class="title">图册</div>
+      <div class="title">js仓库</div>
     </div>
+
   </div>
 </template>
-<script>
-	export default{
-    data(){
-      return{
 
-      }
-    },
-    methods:{
-      goBack(){
-        window.history.go(-1);
+<script>
+    export default {
+        name: "jsWare",
+      methods:{
+        goBack(){
+          window.history.go(-1);
+        }
       },
     }
-	}
 </script>
-<style>
-  .ablum{
+
+<style scoped>
+  .js_ware{
     height:100%;
     width:100%;
   }
@@ -52,5 +51,6 @@
     font-size:24px;
     color: #fff;
     text-align: center;
+    letter-spacing:1.2px;
   }
 </style>

@@ -32,7 +32,8 @@
   export default{
     data(){
       return{
-
+        mess_n:-1,
+        mess_str:"###",
       }
     },
     methods:{
@@ -44,7 +45,7 @@
       },
       goAblum(){
         this.$router.push({
-          path: "/ablum",
+          path: "/album",
           query: {}
         });
       },
@@ -60,7 +61,8 @@
 
     },
     created(){
-
+      window.localStorage.setItem("mess_n",this.mess_n);
+      window.localStorage.setItem("mess_str",this.mess_str);
     }
   }
 </script>
